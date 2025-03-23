@@ -6,6 +6,9 @@ import { BottomSheet } from './BottomSheet';
 import { heavyWasteTypes, HeavyWasteType } from '../data/heavyWasteTypes';
 import { Button } from './Button';
 import { GradientButton } from './GradientButton';
+import { Card } from './Card';
+import { Badge } from './Badge';
+import { spacing } from '../styles/common';
 
 interface HeavyWasteModalProps {
   isOpen: boolean;
@@ -17,8 +20,8 @@ export const HeavyWasteModal = ({ isOpen, onClose, onConfirm }: HeavyWasteModalP
   const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
 
   const handleTypeToggle = (typeId: string) => {
-    setSelectedTypes(prev => 
-      prev.includes(typeId) 
+    setSelectedTypes(prev =>
+      prev.includes(typeId)
         ? prev.filter(id => id !== typeId)
         : [...prev, typeId]
     );
@@ -26,46 +29,36 @@ export const HeavyWasteModal = ({ isOpen, onClose, onConfirm }: HeavyWasteModalP
 
   const handleConfirm = () => {
     onConfirm(selectedTypes);
-    onClose();
   };
 
   return (
     <BottomSheet
       isOpen={isOpen}
       onClose={onClose}
-      title="Heavy Waste Types"
+      title="Heavy Waste Warning"
     >
-      <div className="space-y-4">
-        {/* Description */}
-        <p className="text-sm text-white/70">
-          Please select any heavy waste types you need to dispose of
+      <div className={spacing.section}>
+        {/* Warning Message */}
+        <Badge
+          variant="warning"
+          icon={<ExclamationTriangleIcon className="w-5 h-5" />}
+        >
+          Please Identify Heavy Waste Items
+        </Badge>
+        
+        <p className="text-sm text-white/60">
+          For safety and compliance, we need to know if you&apos;re disposing of any heavy waste materials.
+          Please select all that apply:
         </p>
-
-        {/* Warning Notice */}
-        <div className="flex items-start gap-3 p-3 rounded-xl bg-yellow-400/10 border border-yellow-400/20">
-          <ExclamationTriangleIcon className="w-5 h-5 text-yellow-400 flex-shrink-0 mt-0.5" />
-          <div>
-            <h4 className="text-sm font-medium text-yellow-400 mb-1">
-              Important Notice
-            </h4>
-            <p className="text-sm text-white/60">
-              Heavy waste types have specific requirements and may incur additional charges. 
-              Our team will contact you to discuss pricing based on the exact weight and volume.
-            </p>
-          </div>
-        </div>
 
         {/* Heavy Waste Types List */}
         <div className="space-y-2 max-h-[32vh] overflow-y-auto">
           {heavyWasteTypes.map((type: HeavyWasteType) => (
-            <button
+            <Card
               key={type.id}
               onClick={() => handleTypeToggle(type.id)}
-              className={`w-full p-3 rounded-xl border transition-all flex items-center gap-3 ${
-                selectedTypes.includes(type.id)
-                  ? 'border-emerald-400/50 bg-emerald-400/10'
-                  : 'border-white/10 bg-white/5 hover:bg-white/10'
-              }`}
+              isSelected={selectedTypes.includes(type.id)}
+              className="p-3 flex items-center gap-3"
             >
               <div className={`w-5 h-5 rounded-md border transition-colors flex items-center justify-center ${
                 selectedTypes.includes(type.id)
@@ -82,7 +75,7 @@ export const HeavyWasteModal = ({ isOpen, onClose, onConfirm }: HeavyWasteModalP
                 <div className="text-sm font-medium text-white">{type.title}</div>
                 <div className="text-xs text-white/60">{type.description}</div>
               </div>
-            </button>
+            </Card>
           ))}
         </div>
 

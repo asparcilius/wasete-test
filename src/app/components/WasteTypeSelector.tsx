@@ -5,6 +5,9 @@ import { HeavyWasteModal } from './HeavyWasteModal';
 import { wasteTypes, WasteType } from '../data/wasteTypes';
 import { Button } from './Button';
 import { GradientButton } from './GradientButton';
+import { Card } from './Card';
+import { GradientHeading } from './GradientHeading';
+import { commonStyles } from '../styles/common';
 
 interface WasteTypeSelectorProps {
   onSelect: (wasteType: string[]) => void;
@@ -40,9 +43,9 @@ export const WasteTypeSelector = ({ onSelect, onBack }: WasteTypeSelectorProps) 
     <div className="relative h-[100dvh] flex flex-col">
       {/* Fixed Header */}
       <div className="flex-shrink-0 text-center mb-4">
-        <h1 className="text-4xl font-medium tracking-tight bg-gradient-to-b from-white to-white/60 bg-clip-text text-transparent">
+        <GradientHeading size="xl">
           What are you disposing of?
-        </h1>
+        </GradientHeading>
         <p className="text-lg text-white/60 mt-2">
           Select all the types of waste you need to dispose of
         </p>
@@ -52,14 +55,11 @@ export const WasteTypeSelector = ({ onSelect, onBack }: WasteTypeSelectorProps) 
       <div className="flex-1 overflow-hidden">
         <div className="h-[500px] overflow-y-auto overscroll-contain grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 px-4 pb-24">
           {wasteTypes.map((type: WasteType) => (
-            <button
+            <Card
               key={type.id}
               onClick={() => handleSelect(type.id)}
-              className={`group relative backdrop-blur-xl rounded-xl sm:rounded-2xl p-4 sm:p-5 border transition-all duration-200 ${
-                selectedTypes.includes(type.id)
-                  ? 'bg-emerald-400/10 border-emerald-400/50'
-                  : 'bg-white/5 border-white/10 hover:bg-white/8'
-              }`}
+              isSelected={selectedTypes.includes(type.id)}
+              className="p-4 sm:p-5"
             >
               <div className="flex items-start gap-3 sm:gap-4">
                 <div className={`p-2 sm:p-3 rounded-xl sm:rounded-2xl transition-colors ${
@@ -88,58 +88,62 @@ export const WasteTypeSelector = ({ onSelect, onBack }: WasteTypeSelectorProps) 
                   </div>
                 </div>
               </div>
-            </button>
+            </Card>
           ))}
         </div>
       </div>
 
       {/* Fixed Bottom Actions */}
-      <div className="flex flex-row items-center justify-between gap-3 fixed bottom-0 left-0 right-0 p-4 bg-black/50 backdrop-blur-lg border-t border-white/10">
-        <Button
-          onClick={onBack}
-          variant="primary"
-          icon={
-            <svg
-              className="w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
+      <div className={`flex flex-row items-center justify-between gap-3 ${commonStyles.stickyBar}`}>
+        <div className="container mx-auto px-4">
+          <div className="flex flex-row gap-3">
+            <Button
+              onClick={onBack}
+              variant="primary"
+              icon={
+                <svg
+                  className="w-5 h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M15 19l-7-7 7-7"
+                  />
+                </svg>
+              }
+              iconPosition="left"
+              fullWidth
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M15 19l-7-7 7-7"
-              />
-            </svg>
-          }
-          iconPosition="left"
-          fullWidth
-        >
-          Back
-        </Button>
-        <GradientButton
-          onClick={handleContinue}
-          disabled={selectedTypes.length === 0}
-          icon={
-            <svg
-              className="w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
+              Back
+            </Button>
+            <GradientButton
+              onClick={handleContinue}
+              disabled={selectedTypes.length === 0}
+              icon={
+                <svg
+                  className="w-5 h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9 5l7 7-7 7"
+                  />
+                </svg>
+              }
+              fullWidth
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M9 5l7 7-7 7"
-              />
-            </svg>
-          }
-          fullWidth
-        >
-          Continue
-        </GradientButton>
+              Continue
+            </GradientButton>
+          </div>
+        </div>
       </div>
 
       {/* Heavy Waste Modal */}

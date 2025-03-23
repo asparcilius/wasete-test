@@ -1,95 +1,92 @@
-# Skip Hire Web Application
+# RemWaste - Modern Skip Hire Application
 
-A modern, responsive web application for booking skip hire services. Built with Next.js, TypeScript, and Tailwind CSS.
 
-## Features
+### 1. Beautiful Glassmorphism Design
+I've gone for a modern glassmorphism look because:
+- It looks super premium and modern
+- Makes the UI feel light and airy
+- Keeps everything readable while looking fancy
+- Perfect for a waste management service that wants to look professional
 
-- Postcode validation and lookup
-- Waste type selection
-- Skip size selection with pricing
-- Responsive design for mobile and desktop
-- Modern UI with smooth transitions
-- Progress tracking
+### 2. Smart Step-by-Step Flow
+I've broken down the skip hire process into 3 simple steps:
+1. **Location** (30 sec) - Enter your postcode
+2. **Waste Type** (1 min) - Tell us what you're throwing away
+3. **Skip Selection** (1 min) - Pick the perfect skip size
 
-## Prerequisites
+Why this works:
+- No overwhelming choices
+- Clear progress tracking
+- Each step is focused and simple
+- Less chance of mistakes
 
-- Node.js 18.0 or later
-- npm or yarn
+### 3. Real-Time Features
+- Instant postcode validation
+- Live skip availability checking
+- Smooth transitions between steps
+- Real-time price updates
 
-## Getting Started
+### 4. Mobile-First Approach
+- Works great on phones and tablets
+- Touch-friendly interface
+- Responsive design that adapts to any screen
+- Bottom navigation for easy access
 
-1. Clone the repository:
-```bash
-git clone <repository-url>
-cd remwaste
+## Tech Stack 🛠️
+
+- **Next.js 15** - For blazing fast performance
+- **React 19** - For smooth UI interactions
+- **TypeScript** - For rock-solid code
+- **Tailwind CSS** - For beautiful styling
+- **Headless UI** - For accessible components
+- **Framer Motion** - For smooth animations
+
+## Project Structure 📁
+
 ```
+src/
+├── app/
+│   ├── components/     # Our beautiful UI components
+│   ├── hooks/         # Custom React hooks
+│   ├── services/      # API and business logic
+│   ├── styles/        # Global styles and theme
+│   └── types/         # TypeScript types
+```
+
+## Key Components 🎯
+
+### 1. Reusable UI Components
+- `Card` - Beautiful glassmorphic cards
+- `Button` & `GradientButton` - Stylish action buttons
+- `Badge` - For status and labels
+- `GradientHeading` - Eye-catching titles
+
+### 2. Smart Features
+- Debounced postcode search
+- Real-time validation
+- Smooth transitions
+- Error handling
+- Loading states
+
+### 3. User Experience
+- Clear progress indicators
+- Helpful tooltips
+- Responsive layouts
+- Touch-friendly controls
+
+## Getting Started 🚀
+
+
 
 2. Install dependencies:
-```bash
-npm install
-# or
-yarn install
-```
+   ```bash
+   npm install
+   ```
 
-3. Run the development server:
-```bash
-npm run dev
-# or
-yarn dev
-```
+3. Start the development server:
+   ```bash
+   npm run dev
+   ```
 
-4. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Live url of the demo https://wasete-test.vercel.app/
 
-## Project Structure
-
-```
-remwaste/
-├── src/
-│   ├── app/
-│   │   ├── components/
-│   │   │   ├── PostcodeInput.tsx
-│   │   │   ├── WasteTypeSelector.tsx
-│   │   │   └── SkipSelector.tsx
-│   │   ├── page.tsx
-│   │   ├── layout.tsx
-│   │   └── globals.css
-│   └── ...
-├── public/
-│   └── images/
-├── package.json
-└── README.md
-```
-
-## Technologies Used
-
-- [Next.js](https://nextjs.org/) - React framework
-- [TypeScript](https://www.typescriptlang.org/) - Type safety
-- [Tailwind CSS](https://tailwindcss.com/) - Styling
-- [React](https://reactjs.org/) - UI library
-
-## Development
-
-The application follows a component-based architecture with three main steps:
-
-1. Postcode Input - Validates and collects user postcode
-2. Waste Type Selection - Allows users to choose waste type
-3. Skip Selection - Displays available skip sizes and prices
-
-## API Integration
-
-The application integrates with the We Want Waste API for skip availability and pricing:
-```
-https://app.wewantwaste.co.uk/api/skips/by-location?postcode={postcode}
-```
-
-## Contributing
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.

@@ -5,6 +5,7 @@ import { addressService } from '../services/addressService';
 import type { Address } from '../types/address';
 import { MapPinIcon } from '@heroicons/react/24/outline';
 import { GradientButton } from './GradientButton';
+import { useDebounce } from '../hooks/useDebounce';
 
 interface PostcodeInputProps {
   onSubmit: (address: Address) => void;
@@ -18,12 +19,13 @@ export const PostcodeInput = ({ onSubmit }: PostcodeInputProps) => {
   const [selectedAddress, setSelectedAddress] = useState<Address | null>(null);
   const [showAddressList, setShowAddressList] = useState(false);
   const addressListRef = useRef<HTMLDivElement>(null);
-  const searchTimeoutRef = useRef<NodeJS.Timeout | undefined>(undefined);
 
   // Form fields
   const [city, setCity] = useState('');
   const [street, setStreet] = useState('');
   const [houseNumber, setHouseNumber] = useState('');
+
+  const [shouldSearch, setShouldSearch] = useState(true);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -63,31 +65,24 @@ export const PostcodeInput = ({ onSubmit }: PostcodeInputProps) => {
     }
   }, [postcode]);
 
-  useEffect(() => {
-    if (searchTimeoutRef.current) {
-      clearTimeout(searchTimeoutRef.current);
-    }
-
-    if (postcode.length >= 5) {
-      searchTimeoutRef.current = setTimeout(() => {
+  useDebounce(
+    () => {
+      if (postcode.length >= 5 && shouldSearch) {
         handlePostcodeSearch();
-      }, 300);
-    } else {
-      setAddresses([]);
-      setShowAddressList(false);
-    }
-
-    return () => {
-      if (searchTimeoutRef.current) {
-        clearTimeout(searchTimeoutRef.current);
+      } else if (postcode.length < 5) {
+        setAddresses([]);
+        setShowAddressList(false);
       }
-    };
-  }, [postcode, handlePostcodeSearch]);
+    },
+    300,
+    [postcode, shouldSearch]
+  );
 
   const handleAddressSelect = async (address: Address) => {
     try {
       setLoading(true);
       setError('');
+      setShouldSearch(false);  // Disable searching after selection
       const details = await addressService.getAddressDetails(address.id);
       setSelectedAddress(details);
       setShowAddressList(false);
@@ -100,10 +95,20 @@ export const PostcodeInput = ({ onSubmit }: PostcodeInputProps) => {
     } catch (error) {
       console.error('Error fetching address details:', error);
       setError('Failed to fetch address details. Please try again.');
+      setShouldSearch(true);  // Re-enable searching if there's an error
     } finally {
       setLoading(false);
     }
   };
+
+  // Reset search state when postcode changes
+  useEffect(() => {
+    setShouldSearch(true);
+    setSelectedAddress(null);
+    setCity('');
+    setStreet('');
+    setHouseNumber('');
+  }, [postcode]);
 
   const handleSubmit = () => {
     if (selectedAddress) {
