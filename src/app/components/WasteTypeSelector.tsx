@@ -2,50 +2,14 @@
 
 import { useState } from 'react';
 import { HeavyWasteModal } from './HeavyWasteModal';
-
-interface WasteType {
-  id: string;
-  title: string;
-  description: string;
-  examples: string[];
-  icon: string;
-}
+import { wasteTypes, WasteType } from '../data/wasteTypes';
+import { Button } from './Button';
+import { GradientButton } from './GradientButton';
 
 interface WasteTypeSelectorProps {
   onSelect: (wasteType: string[]) => void;
   onBack: () => void;
 }
-
-const wasteTypes: WasteType[] = [
-  {
-    id: 'household',
-    title: 'Household Waste',
-    description: 'General household items and furniture',
-    examples: ['Furniture', 'Garden waste', 'Appliances', 'General household items'],
-    icon: '🏠'
-  },
-  {
-    id: 'construction',
-    title: 'Construction Waste',
-    description: 'Building materials and renovation debris',
-    examples: ['Bricks', 'Timber', 'Concrete', 'Plasterboard'],
-    icon: '🏗️'
-  },
-  {
-    id: 'garden',
-    title: 'Garden Waste',
-    description: 'Green waste and landscaping materials',
-    examples: ['Soil', 'Branches', 'Plants', 'Grass cuttings'],
-    icon: '🌿'
-  },
-  {
-    id: 'commercial',
-    title: 'Commercial Waste',
-    description: 'Business and office clearance',
-    examples: ['Office furniture', 'Shop fittings', 'Equipment', 'Commercial debris'],
-    icon: '🏢'
-  }
-];
 
 export const WasteTypeSelector = ({ onSelect, onBack }: WasteTypeSelectorProps) => {
   const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
@@ -87,7 +51,7 @@ export const WasteTypeSelector = ({ onSelect, onBack }: WasteTypeSelectorProps) 
       {/* Scrollable Selections */}
       <div className="flex-1 overflow-hidden">
         <div className="h-[500px] overflow-y-auto overscroll-contain grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 px-4 pb-24">
-          {wasteTypes.map((type) => (
+          {wasteTypes.map((type: WasteType) => (
             <button
               key={type.id}
               onClick={() => handleSelect(type.id)}
@@ -131,49 +95,51 @@ export const WasteTypeSelector = ({ onSelect, onBack }: WasteTypeSelectorProps) 
 
       {/* Fixed Bottom Actions */}
       <div className="flex flex-row items-center justify-between gap-3 fixed bottom-0 left-0 right-0 p-4 bg-black/50 backdrop-blur-lg border-t border-white/10">
-        <button
+        <Button
           onClick={onBack}
-          className="flex-1 px-6 py-3 rounded-xl font-medium bg-white/5 text-white hover:bg-white/10 transition-all flex items-center justify-center group"
+          variant="primary"
+          icon={
+            <svg
+              className="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M15 19l-7-7 7-7"
+              />
+            </svg>
+          }
+          iconPosition="left"
+          fullWidth
         >
-          <svg
-            className="w-5 h-5 mr-2 group-hover:-translate-x-0.5 transition-transform"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M15 19l-7-7 7-7"
-            />
-          </svg>
           Back
-        </button>
-        <button
+        </Button>
+        <GradientButton
           onClick={handleContinue}
           disabled={selectedTypes.length === 0}
-          className={`flex-1 px-6 py-3 rounded-xl font-medium transition-all flex items-center justify-center group ${
-            selectedTypes.length > 0
-              ? 'bg-gradient-to-r from-emerald-400 to-teal-400 text-black hover:from-emerald-500 hover:to-teal-500'
-              : 'bg-white/5 text-white/40 cursor-not-allowed'
-          }`}
+          icon={
+            <svg
+              className="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M9 5l7 7-7 7"
+              />
+            </svg>
+          }
+          fullWidth
         >
           Continue
-          <svg
-            className="w-5 h-5 ml-2 group-hover:translate-x-0.5 transition-transform"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M9 5l7 7-7 7"
-            />
-          </svg>
-        </button>
+        </GradientButton>
       </div>
 
       {/* Heavy Waste Modal */}

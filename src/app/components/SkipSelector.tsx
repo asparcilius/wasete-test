@@ -6,6 +6,7 @@ import { skipService, Skip } from '../services/skipService';
 import { ApiResponseError } from '../utils/api';
 import { Loading } from './Loading';
 import { TruckIcon } from '@heroicons/react/24/outline';
+import { GradientButton } from './GradientButton';
 
 interface SkipSelectorProps {
   postcode: string;
@@ -191,12 +192,13 @@ export const SkipSelector = ({ postcode, area, onSelect, onBack }: SkipSelectorP
                     </div>
                   </div>
                 </div>
-                <button
+                <GradientButton
                   onClick={() => onSelect(selectedSkip)}
-                  className="flex-shrink-0 w-full sm:w-auto px-6 py-3 rounded-xl bg-gradient-to-r from-emerald-400 to-teal-400 text-black font-medium hover:from-emerald-500 hover:to-teal-500 transition-all"
+                  size="md"
+                  className="flex-shrink-0 w-full sm:w-auto"
                 >
                   Continue
-                </button>
+                </GradientButton>
               </>
             ) : (
               <div className="text-sm text-white/60 text-center w-full py-2">

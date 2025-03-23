@@ -4,6 +4,7 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 import { addressService } from '../services/addressService';
 import type { Address } from '../types/address';
 import { MapPinIcon } from '@heroicons/react/24/outline';
+import { GradientButton } from './GradientButton';
 
 interface PostcodeInputProps {
   onSubmit: (address: Address) => void;
@@ -221,25 +222,29 @@ export const PostcodeInput = ({ onSubmit }: PostcodeInputProps) => {
               </div>
 
               {/* Continue Button */}
-              <button
+              <GradientButton
                 onClick={handleSubmit}
-                className="w-full mt-6 sm:mt-8 bg-gradient-to-r from-emerald-400 to-teal-400 text-black font-medium py-3 sm:py-4 px-4 sm:px-6 rounded-xl sm:rounded-2xl hover:from-emerald-500 hover:to-teal-500 transition-all duration-200 flex items-center justify-center group text-base"
+                fullWidth
+                size="lg"
+                className="mt-6 sm:mt-8"
+                icon={
+                  <svg
+                    className="w-4 h-4 sm:w-5 sm:h-5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M9 5l7 7-7 7"
+                    />
+                  </svg>
+                }
               >
                 Continue
-                <svg
-                  className="w-4 h-4 sm:w-5 sm:h-5 ml-1.5 sm:ml-2 group-hover:translate-x-0.5 transition-transform"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M9 5l7 7-7 7"
-                  />
-                </svg>
-              </button>
+              </GradientButton>
             </div>
           )}
         </div>

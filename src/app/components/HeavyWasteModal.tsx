@@ -3,50 +3,15 @@
 import { useState } from 'react';
 import { ExclamationTriangleIcon } from '@heroicons/react/24/outline';
 import { BottomSheet } from './BottomSheet';
+import { heavyWasteTypes, HeavyWasteType } from '../data/heavyWasteTypes';
+import { Button } from './Button';
+import { GradientButton } from './GradientButton';
 
 interface HeavyWasteModalProps {
   isOpen: boolean;
   onClose: () => void;
   onConfirm: (heavyWasteTypes: string[]) => void;
 }
-
-const heavyWasteTypes = [
-  {
-    id: 'soil',
-    title: 'Soil',
-    description: 'Including topsoil and subsoil'
-  },
-  {
-    id: 'concrete',
-    title: 'Concrete',
-    description: 'Blocks, slabs, and foundations'
-  },
-  {
-    id: 'bricks',
-    title: 'Bricks',
-    description: 'Whole or broken bricks'
-  },
-  {
-    id: 'tiles',
-    title: 'Tiles',
-    description: 'Ceramic, porcelain, or stone tiles'
-  },
-  {
-    id: 'sand',
-    title: 'Sand',
-    description: 'Building or garden sand'
-  },
-  {
-    id: 'gravel',
-    title: 'Gravel',
-    description: 'Stone and aggregate'
-  },
-  {
-    id: 'rubble',
-    title: 'Rubble',
-    description: 'Mixed construction debris'
-  }
-];
 
 export const HeavyWasteModal = ({ isOpen, onClose, onConfirm }: HeavyWasteModalProps) => {
   const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
@@ -92,7 +57,7 @@ export const HeavyWasteModal = ({ isOpen, onClose, onConfirm }: HeavyWasteModalP
 
         {/* Heavy Waste Types List */}
         <div className="space-y-2 max-h-[32vh] overflow-y-auto">
-          {heavyWasteTypes.map((type) => (
+          {heavyWasteTypes.map((type: HeavyWasteType) => (
             <button
               key={type.id}
               onClick={() => handleTypeToggle(type.id)}
@@ -123,18 +88,21 @@ export const HeavyWasteModal = ({ isOpen, onClose, onConfirm }: HeavyWasteModalP
 
         {/* Action Buttons */}
         <div className="flex flex-col sm:flex-row gap-3 pt-2">
-          <button
+          <Button
             onClick={onClose}
-            className="flex-1 px-4 py-2.5 rounded-xl bg-white/5 text-white/70 hover:bg-white/10 transition-colors text-sm"
+            variant="secondary"
+            size="sm"
+            fullWidth
           >
             Cancel
-          </button>
-          <button
+          </Button>
+          <GradientButton
             onClick={handleConfirm}
-            className="flex-1 px-4 py-2.5 rounded-xl bg-gradient-to-r from-emerald-400 to-teal-400 text-black font-medium hover:from-emerald-500 hover:to-teal-500 transition-all text-sm"
+            size="sm"
+            fullWidth
           >
             Confirm Selection
-          </button>
+          </GradientButton>
         </div>
       </div>
     </BottomSheet>

@@ -13,7 +13,7 @@ interface BottomSheetProps {
 
 export const BottomSheet = ({ isOpen, onClose, title, children }: BottomSheetProps) => {
   return (
-    <Transition.Root show={isOpen} as={Fragment}>
+    <Transition show={isOpen} as={Fragment}>
       <Dialog as="div" className="relative z-50" onClose={onClose}>
         <Transition.Child
           as={Fragment}
@@ -59,6 +59,6 @@ export const BottomSheet = ({ isOpen, onClose, title, children }: BottomSheetPro
           </div>
         </div>
       </Dialog>
-    </Transition.Root>
+    </Transition>
   );
 }; 
