@@ -85,8 +85,8 @@ export const WasteTypeSelector = ({ onSelect, onBack }: WasteTypeSelectorProps) 
       </div>
 
       {/* Scrollable Selections */}
-      <div className="flex-1 overflow-y-auto overscroll-contain -webkit-overflow-scrolling-touch">
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 px-4 pb-24">
+      <div className="flex-1 overflow-hidden">
+        <div className="h-[500px] overflow-y-auto overscroll-contain grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 px-4 pb-24">
           {wasteTypes.map((type) => (
             <button
               key={type.id}

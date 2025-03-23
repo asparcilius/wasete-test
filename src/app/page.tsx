@@ -8,7 +8,6 @@ import { ThankYou } from './components/ThankYou';
 import type { Address } from './types/address';
 import type { Skip } from './services/skipService';
 import { MapPinIcon, TrashIcon, TruckIcon } from '@heroicons/react/24/outline';
-import { SwipeContainer } from './components/SwipeContainer';
 
 type Step = 'postcode' | 'waste-type' | 'skip-select' | 'thank-you';
 
@@ -44,20 +43,6 @@ export default function Home() {
     }
   };
 
-  const handleSwipeRight = () => {
-    switch (currentStep) {
-      case 'skip-select':
-        setCurrentStep('waste-type');
-        break;
-      default:
-        break;
-    }
-  };
-
-  const canSwipeRight = () => {
-    return currentStep === 'skip-select';
-  };
-
   const steps = [
     { 
       id: 'postcode', 
@@ -85,7 +70,6 @@ export default function Home() {
     }
   ];
 
-  // Add completed steps tracking
   const getStepProgress = (stepId: string) => {
     switch (stepId) {
       case 'postcode':
@@ -194,38 +178,32 @@ export default function Home() {
 
         {/* Step Content */}
         <div className="mt-8">
-          <SwipeContainer
-            onSwipeRight={handleSwipeRight}
-            canSwipeRight={canSwipeRight()}
-            canSwipeLeft={false}
-          >
-            {currentStep === 'postcode' && (
-              <PostcodeInput onSubmit={handleAddressSubmit} />
-            )}
-            {currentStep === 'waste-type' && (
-              <WasteTypeSelector
-                onSelect={handleWasteTypeSelect}
-                onBack={handleBack}
-              />
-            )}
-            {currentStep === 'skip-select' && selectedAddress && (
-              <SkipSelector
-                postcode={selectedAddress.postcode}
-                area={selectedAddress.city}
-                onSelect={handleSkipSelect}
-                onBack={handleBack}
-              />
-            )}
-            {currentStep === 'thank-you' && selectedSkip && selectedAddress && (
-              <ThankYou
-                skip={selectedSkip}
-                address={{
-                  postcode: selectedAddress.postcode,
-                  city: selectedAddress.city
-                }}
-              />
-            )}
-          </SwipeContainer>
+          {currentStep === 'postcode' && (
+            <PostcodeInput onSubmit={handleAddressSubmit} />
+          )}
+          {currentStep === 'waste-type' && (
+            <WasteTypeSelector
+              onSelect={handleWasteTypeSelect}
+              onBack={handleBack}
+            />
+          )}
+          {currentStep === 'skip-select' && selectedAddress && (
+            <SkipSelector
+              postcode={selectedAddress.postcode}
+              area={selectedAddress.city}
+              onSelect={handleSkipSelect}
+              onBack={handleBack}
+            />
+          )}
+          {currentStep === 'thank-you' && selectedSkip && selectedAddress && (
+            <ThankYou
+              skip={selectedSkip}
+              address={{
+                postcode: selectedAddress.postcode,
+                city: selectedAddress.city
+              }}
+            />
+          )}
         </div>
       </div>
     </main>

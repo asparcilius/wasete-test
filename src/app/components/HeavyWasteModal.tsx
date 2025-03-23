@@ -91,7 +91,7 @@ export const HeavyWasteModal = ({ isOpen, onClose, onConfirm }: HeavyWasteModalP
         </div>
 
         {/* Heavy Waste Types List */}
-        <div className="space-y-2 max-h-[40vh] overflow-y-auto">
+        <div className="space-y-2 max-h-[32vh] overflow-y-auto">
           {heavyWasteTypes.map((type) => (
             <button
               key={type.id}
