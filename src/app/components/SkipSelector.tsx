@@ -180,14 +180,14 @@ export const SkipSelector = ({ postcode, area, onSelect, onBack }: SkipSelectorP
       {/* Fixed Bottom Bar */}
       {selectedSkip && (
         <div className="fixed bottom-0 left-0 right-0 bg-black/80 backdrop-blur-xl border-t border-white/10">
-          <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-            <div className="flex items-center gap-6">
+          <div className="container mx-auto px-4 py-2.5 sm:py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-0">
+            <div className="flex items-center justify-between sm:justify-start sm:gap-6">
               <button
                 onClick={onBack}
-                className="px-6 py-3 rounded-xl font-medium bg-white/5 text-white hover:bg-white/10 transition-all duration-200 flex items-center group"
+                className="px-4 sm:px-6 py-2 sm:py-3 rounded-xl font-medium bg-white/5 text-white hover:bg-white/10 transition-all duration-200 flex items-center group text-sm sm:text-base"
               >
                 <svg
-                  className="w-5 h-5 mr-2 group-hover:-translate-x-0.5 transition-transform"
+                  className="w-4 h-4 sm:w-5 sm:h-5 mr-1.5 sm:mr-2 group-hover:-translate-x-0.5 transition-transform"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -196,21 +196,21 @@ export const SkipSelector = ({ postcode, area, onSelect, onBack }: SkipSelectorP
                 </svg>
                 Back
               </button>
-              <div className="flex items-baseline gap-2">
-                <span className="text-white/60">Selected:</span>
-                <span className="text-white font-medium">{selectedSkip.size} Yard Skip</span>
-                <span className="text-2xl font-medium bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent ml-4">
+              <div className="flex items-baseline gap-1.5 sm:gap-2">
+                <span className="text-white/60 text-sm">Selected:</span>
+                <span className="text-white font-medium text-sm sm:text-base">{selectedSkip.size} Yard Skip</span>
+                <span className="text-xl sm:text-2xl font-medium bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent ml-2 sm:ml-4">
                   £{selectedSkip.price.toFixed(2)}
                 </span>
               </div>
             </div>
             <button
               onClick={() => onSelect(selectedSkip)}
-              className="px-8 py-3 rounded-xl font-medium bg-gradient-to-r from-emerald-400 to-teal-400 text-black hover:from-emerald-300 hover:to-teal-300 transition-all duration-200 flex items-center group"
+              className="w-full sm:w-auto px-6 sm:px-8 py-2.5 sm:py-3 rounded-xl font-medium bg-gradient-to-r from-emerald-400 to-teal-400 text-black hover:from-emerald-300 hover:to-teal-300 transition-all duration-200 flex items-center justify-center group text-sm sm:text-base"
             >
               Continue
               <svg
-                className="w-5 h-5 ml-2 group-hover:translate-x-0.5 transition-transform"
+                className="w-4 h-4 sm:w-5 sm:h-5 ml-1.5 sm:ml-2 group-hover:translate-x-0.5 transition-transform"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"

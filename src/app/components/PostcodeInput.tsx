@@ -110,21 +110,21 @@ export const PostcodeInput = ({ onSubmit }: PostcodeInputProps) => {
   };
 
   return (
-    <div className="w-full max-w-2xl mx-auto p-6">
-      <div className="text-center mb-12">
-        <h1 className="text-4xl font-medium tracking-tight bg-gradient-to-b from-white to-white/60 bg-clip-text text-transparent">
+    <div className="w-full max-w-2xl mx-auto p-4 sm:p-6">
+      <div className="text-center mb-8 sm:mb-12">
+        <h1 className="text-3xl sm:text-4xl font-medium tracking-tight bg-gradient-to-b from-white to-white/60 bg-clip-text text-transparent">
           Find Available Skips
         </h1>
-        <p className="text-lg text-white/60 mt-2">
+        <p className="text-base sm:text-lg text-white/60 mt-2">
           Enter your postcode to see skip hire options in your area
         </p>
       </div>
       
-      <div className="space-y-6 backdrop-blur-xl bg-white/5 rounded-3xl p-8 border border-white/10">
-        <div className="space-y-6">
+      <div className="space-y-4 sm:space-y-6 backdrop-blur-xl bg-white/5 rounded-2xl sm:rounded-3xl p-4 sm:p-8 border border-white/10">
+        <div className="space-y-4 sm:space-y-6">
           {/* Postcode Input */}
           <div>
-            <label htmlFor="postcode" className="block text-white/80 text-sm font-medium mb-2">
+            <label htmlFor="postcode" className="block text-white/80 text-sm font-medium mb-1.5 sm:mb-2">
               Postcode
             </label>
             <div className="relative">
@@ -132,14 +132,14 @@ export const PostcodeInput = ({ onSubmit }: PostcodeInputProps) => {
                 <input
                   type="text"
                   id="postcode"
-                  className="flex-1 bg-white/5 text-white px-6 py-4 rounded-2xl focus:outline-none border border-white/10 focus:border-white/20 transition-colors placeholder:text-white/40"
+                  className="flex-1 bg-white/5 text-white px-4 sm:px-6 py-3 sm:py-4 rounded-xl sm:rounded-2xl focus:outline-none border border-white/10 focus:border-white/20 transition-colors placeholder:text-white/40 text-base"
                   placeholder="Enter your postcode"
                   value={postcode}
                   onChange={(e) => setPostcode(e.target.value.toUpperCase())}
                 />
                 {loading && (
                   <div className="absolute right-4 top-1/2 -translate-y-1/2">
-                    <div className="w-5 h-5 border-2 border-white/20 border-t-white/80 rounded-full animate-spin" />
+                    <div className="w-4 h-4 sm:w-5 sm:h-5 border-2 border-white/20 border-t-white/80 rounded-full animate-spin" />
                   </div>
                 )}
               </div>
@@ -179,41 +179,41 @@ export const PostcodeInput = ({ onSubmit }: PostcodeInputProps) => {
 
           {/* Address Fields */}
           {selectedAddress && (
-            <div className="space-y-6 mt-8">
+            <div className="space-y-4 sm:space-y-6 mt-6 sm:mt-8">
               <div>
-                <label htmlFor="city" className="block text-white/80 text-sm font-medium mb-2">
+                <label htmlFor="city" className="block text-white/80 text-sm font-medium mb-1.5 sm:mb-2">
                   City
                 </label>
                 <input
                   type="text"
                   id="city"
-                  className="w-full bg-white/5 text-white px-6 py-4 rounded-2xl focus:outline-none border border-white/10 focus:border-white/20 transition-colors"
+                  className="w-full bg-white/5 text-white px-4 sm:px-6 py-3 sm:py-4 rounded-xl sm:rounded-2xl focus:outline-none border border-white/10 focus:border-white/20 transition-colors text-base"
                   value={city}
                   readOnly
                 />
               </div>
 
               <div>
-                <label htmlFor="street" className="block text-white/80 text-sm font-medium mb-2">
+                <label htmlFor="street" className="block text-white/80 text-sm font-medium mb-1.5 sm:mb-2">
                   Street Name
                 </label>
                 <input
                   type="text"
                   id="street"
-                  className="w-full bg-white/5 text-white px-6 py-4 rounded-2xl focus:outline-none border border-white/10 focus:border-white/20 transition-colors"
+                  className="w-full bg-white/5 text-white px-4 sm:px-6 py-3 sm:py-4 rounded-xl sm:rounded-2xl focus:outline-none border border-white/10 focus:border-white/20 transition-colors text-base"
                   value={street}
                   readOnly
                 />
               </div>
 
               <div>
-                <label htmlFor="houseNumber" className="block text-white/80 text-sm font-medium mb-2">
+                <label htmlFor="houseNumber" className="block text-white/80 text-sm font-medium mb-1.5 sm:mb-2">
                   House/Flat Number
                 </label>
                 <input
                   type="text"
                   id="houseNumber"
-                  className="w-full bg-white/5 text-white px-6 py-4 rounded-2xl focus:outline-none border border-white/10 focus:border-white/20 transition-colors"
+                  className="w-full bg-white/5 text-white px-4 sm:px-6 py-3 sm:py-4 rounded-xl sm:rounded-2xl focus:outline-none border border-white/10 focus:border-white/20 transition-colors text-base"
                   value={houseNumber}
                   readOnly
                 />
@@ -222,11 +222,11 @@ export const PostcodeInput = ({ onSubmit }: PostcodeInputProps) => {
               {/* Continue Button */}
               <button
                 onClick={handleSubmit}
-                className="w-full mt-8 bg-gradient-to-r from-emerald-400 to-teal-400 text-black font-medium py-4 px-6 rounded-2xl hover:from-emerald-500 hover:to-teal-500 transition-all duration-200 flex items-center justify-center group"
+                className="w-full mt-6 sm:mt-8 bg-gradient-to-r from-emerald-400 to-teal-400 text-black font-medium py-3 sm:py-4 px-4 sm:px-6 rounded-xl sm:rounded-2xl hover:from-emerald-500 hover:to-teal-500 transition-all duration-200 flex items-center justify-center group text-base"
               >
                 Continue
                 <svg
-                  className="w-5 h-5 ml-2 group-hover:translate-x-0.5 transition-transform"
+                  className="w-4 h-4 sm:w-5 sm:h-5 ml-1.5 sm:ml-2 group-hover:translate-x-0.5 transition-transform"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -244,7 +244,7 @@ export const PostcodeInput = ({ onSubmit }: PostcodeInputProps) => {
         </div>
       </div>
       
-      <div className="mt-6 text-center text-sm text-white/40">
+      <div className="mt-4 sm:mt-6 text-center text-xs sm:text-sm text-white/40">
         Liviu Vasilescu Demo
       </div>
     </div>
