@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { addressService } from '../services/addressService';
 import type { Address } from '../types/address';
+import { MapPinIcon } from '@heroicons/react/24/outline';
 
 interface PostcodeInputProps {
   onSubmit: (address: Address) => void;
@@ -149,29 +150,29 @@ export const PostcodeInput = ({ onSubmit }: PostcodeInputProps) => {
               )}
 
               {showAddressList && addresses.length > 0 && (
-                <div
+                <div 
                   ref={addressListRef}
-                  className="absolute z-10 w-full mt-2 backdrop-blur-xl bg-white/5 rounded-2xl border border-white/10 shadow-2xl max-h-[280px] overflow-y-auto"
+                  className="absolute left-0 right-0 top-full mt-2 bg-gray-900 border border-white/10 rounded-xl shadow-xl overflow-hidden z-50"
                 >
-                  {addresses.map((address) => (
-                    <button
-                      key={address.id}
-                      onClick={() => handleAddressSelect(address)}
-                      className="w-full px-6 py-4 text-left hover:bg-white/5 focus:outline-none focus:bg-white/5 border-b border-white/5 last:border-0 transition-colors group"
-                    >
-                      <div className="flex items-center gap-3">
-                        <div className="p-2 rounded-full bg-white/5 group-hover:bg-white/10 transition-colors">
-                          <svg className="w-4 h-4 text-white/60" fill="currentColor" viewBox="0 0 20 20">
-                            <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
-                          </svg>
+                  <div className="max-h-[240px] overflow-y-auto">
+                    {addresses.map((address) => (
+                      <button
+                        key={address.id}
+                        onClick={() => handleAddressSelect(address)}
+                        className="w-full px-4 py-3 flex items-start gap-3 hover:bg-white/5 transition-colors border-b border-white/5 last:border-0"
+                      >
+                        <div className="flex-shrink-0 mt-1">
+                          <div className="w-6 h-6 rounded-full bg-emerald-400/10 flex items-center justify-center">
+                            <MapPinIcon className="w-3 h-3 text-emerald-400" />
+                          </div>
                         </div>
-                        <div>
-                          <p className="text-white font-medium">{address.line1}</p>
-                          <p className="text-sm text-white/60">{address.city}</p>
+                        <div className="text-left">
+                          <div className="text-sm font-medium text-white">{address.line1}</div>
+                          <div className="text-xs text-white/60 mt-0.5">{address.fullAddress}</div>
                         </div>
-                      </div>
-                    </button>
-                  ))}
+                      </button>
+                    ))}
+                  </div>
                 </div>
               )}
             </div>
