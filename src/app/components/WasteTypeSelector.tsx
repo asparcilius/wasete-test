@@ -73,51 +73,28 @@ export const WasteTypeSelector = ({ onSelect, onBack }: WasteTypeSelectorProps) 
   };
 
   return (
-    <div className="w-full max-w-6xl mx-auto p-4 sm:p-6">
-      <div className="text-center mb-6 sm:mb-12">
-        <h1 className="text-3xl sm:text-4xl font-medium tracking-tight bg-gradient-to-b from-white to-white/60 bg-clip-text text-transparent">
-          Select Waste Types
+    <div className="relative h-[calc(100vh-12rem)] flex flex-col">
+      {/* Fixed Header */}
+      <div className="flex-shrink-0 text-center mb-6">
+        <h1 className="text-4xl font-medium tracking-tight bg-gradient-to-b from-white to-white/60 bg-clip-text text-transparent">
+          What are you disposing of?
         </h1>
-        <p className="text-base sm:text-lg text-white/60 mt-2">
-          Choose the types of waste you need to dispose of
+        <p className="text-lg text-white/60 mt-2">
+          Select all the types of waste you need to dispose of
         </p>
       </div>
 
-      <div className="space-y-4 sm:space-y-8 backdrop-blur-xl bg-white/5 rounded-2xl sm:rounded-3xl p-4 sm:p-8 border border-white/10">
-        {/* Info Box */}
-        <div className="p-4 sm:p-6 rounded-xl sm:rounded-2xl bg-white/5 border border-white/10">
-          <div className="flex items-start gap-3 sm:gap-4">
-            <div className="p-1.5 sm:p-2 rounded-full bg-white/5">
-              <svg className="w-4 h-4 sm:w-5 sm:h-5 text-white/60" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
-              </svg>
-            </div>
-            <div className="space-y-2 sm:space-y-3">
-              <p className="text-sm sm:text-base text-white/80">You can select multiple waste types. Some items may require special handling:</p>
-              <ul className="space-y-1.5 sm:space-y-2 text-sm text-white/60">
-                <li className="flex items-center gap-2">
-                  <span className="w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-white/40"></span>
-                  Plasterboard and drywall materials
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-white/40"></span>
-                  Heavy construction materials (soil, concrete, etc.)
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        {/* Waste Type Grid */}
-        <div className="grid grid-cols-1 gap-3 sm:gap-4">
+      {/* Scrollable Selections */}
+      <div className="flex-1 overflow-y-auto pr-1 -mr-1">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
           {wasteTypes.map((type) => (
             <button
               key={type.id}
               onClick={() => handleSelect(type.id)}
-              className={`group p-4 sm:p-6 rounded-xl sm:rounded-2xl border transition-all duration-200 ${
+              className={`group relative backdrop-blur-xl rounded-xl sm:rounded-2xl p-4 sm:p-5 border transition-all duration-200 ${
                 selectedTypes.includes(type.id)
-                  ? 'border-emerald-400/50 bg-emerald-400/10'
-                  : 'border-white/10 bg-white/5 hover:bg-white/10'
+                  ? 'bg-emerald-400/10 border-emerald-400/50'
+                  : 'bg-white/5 border-white/10 hover:bg-white/8'
               }`}
             >
               <div className="flex items-start gap-3 sm:gap-4">
@@ -150,15 +127,17 @@ export const WasteTypeSelector = ({ onSelect, onBack }: WasteTypeSelectorProps) 
             </button>
           ))}
         </div>
+      </div>
 
-        {/* Navigation Buttons */}
-        <div className="flex justify-between pt-2 sm:pt-4">
+      {/* Fixed Bottom Actions */}
+      <div className="flex-shrink-0 mt-6">
+        <div className="flex flex-col sm:flex-row sm:justify-between gap-3">
           <button
             onClick={onBack}
-            className="px-4 sm:px-6 py-2.5 sm:py-4 rounded-xl sm:rounded-2xl font-medium bg-white/5 text-white hover:bg-white/10 transition-all duration-200 flex items-center group text-sm sm:text-base"
+            className="px-6 py-3 rounded-xl font-medium bg-white/5 text-white hover:bg-white/10 transition-all flex items-center justify-center group"
           >
             <svg
-              className="w-4 h-4 sm:w-5 sm:h-5 mr-1.5 sm:mr-2 group-hover:-translate-x-0.5 transition-transform"
+              className="w-5 h-5 mr-2 group-hover:-translate-x-0.5 transition-transform"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -175,7 +154,7 @@ export const WasteTypeSelector = ({ onSelect, onBack }: WasteTypeSelectorProps) 
           <button
             onClick={handleContinue}
             disabled={selectedTypes.length === 0}
-            className={`px-6 sm:px-8 py-2.5 sm:py-4 rounded-xl sm:rounded-2xl font-medium transition-all duration-200 flex items-center group text-sm sm:text-base ${
+            className={`sm:w-[200px] px-6 py-3 rounded-xl font-medium transition-all flex items-center justify-center group ${
               selectedTypes.length > 0
                 ? 'bg-gradient-to-r from-emerald-400 to-teal-400 text-black hover:from-emerald-500 hover:to-teal-500'
                 : 'bg-white/5 text-white/40 cursor-not-allowed'
@@ -183,7 +162,7 @@ export const WasteTypeSelector = ({ onSelect, onBack }: WasteTypeSelectorProps) 
           >
             Continue
             <svg
-              className="w-4 h-4 sm:w-5 sm:h-5 ml-1.5 sm:ml-2 group-hover:translate-x-0.5 transition-transform"
+              className="w-5 h-5 ml-2 group-hover:translate-x-0.5 transition-transform"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -199,6 +178,7 @@ export const WasteTypeSelector = ({ onSelect, onBack }: WasteTypeSelectorProps) 
         </div>
       </div>
 
+      {/* Heavy Waste Modal */}
       <HeavyWasteModal
         isOpen={showHeavyWasteModal}
         onClose={() => setShowHeavyWasteModal(false)}
