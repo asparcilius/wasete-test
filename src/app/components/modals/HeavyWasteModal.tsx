@@ -2,13 +2,13 @@
 
 import { useState } from 'react';
 import { ExclamationTriangleIcon } from '@heroicons/react/24/outline';
-import { BottomSheet } from './BottomSheet';
-import { heavyWasteTypes, HeavyWasteType } from '../data/heavyWasteTypes';
-import { Button } from './Button';
-import { GradientButton } from './GradientButton';
-import { Card } from './Card';
-import { Badge } from './Badge';
-import { spacing } from '../styles/common';
+import { BottomSheet } from '../layout/BottomSheet';
+import { heavyWasteTypes, HeavyWasteType } from '../../data/heavyWasteTypes';
+import { Button } from '../common/Button';
+import { GradientButton } from '../common/GradientButton';
+import { Card } from '../common/Card';
+import { Badge } from '../common/Badge';
+import { spacing } from '../../styles/common';
 
 interface HeavyWasteModalProps {
   isOpen: boolean;

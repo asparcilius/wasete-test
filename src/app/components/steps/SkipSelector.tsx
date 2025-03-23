@@ -2,16 +2,16 @@
 
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
-import { skipService, Skip } from '../services/skipService';
-import { ApiResponseError } from '../utils/api';
-import { Loading } from './Loading';
+import { skipService, Skip } from '../../services/skipService';
+import { ApiResponseError } from '../../utils/api';
+import { Loading } from '../common/Loading';
 import { TruckIcon } from '@heroicons/react/24/outline';
-import { Button } from './Button';
-import { GradientButton } from './GradientButton';
-import { Card } from './Card';
-import { GradientHeading } from './GradientHeading';
-import { Badge } from './Badge';
-import { commonStyles, spacing } from '../styles/common';
+import { Button } from '../common/Button';
+import { GradientButton } from '../common/GradientButton';
+import { Card } from '../common/Card';
+import { GradientHeading } from '../common/GradientHeading';
+import { Badge } from '../common/Badge';
+import { commonStyles, spacing } from '../../styles/common';
 
 interface SkipSelectorProps {
   postcode: string;

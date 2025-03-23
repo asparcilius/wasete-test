@@ -1,10 +1,10 @@
 'use client';
 
 import { useState } from 'react';
-import { PostcodeInput } from './components/PostcodeInput';
-import { WasteTypeSelector } from './components/WasteTypeSelector';
-import { SkipSelector } from './components/SkipSelector';
-import { ThankYou } from './components/ThankYou';
+import { PostcodeInput } from './components/forms/PostcodeInput';
+import { WasteTypeSelector } from './components/steps/WasteTypeSelector';
+import { SkipSelector } from './components/steps/SkipSelector';
+import { ThankYou } from './components/steps/ThankYou';
 import type { Address } from './types/address';
 import type { Skip } from './services/skipService';
 import { MapPinIcon, TrashIcon, TruckIcon } from '@heroicons/react/24/outline';

@@ -3,7 +3,7 @@
 import { useEffect, useRef } from 'react';
 import dynamic from 'next/dynamic';
 import type { LottieRefCurrentProps } from 'lottie-react';
-import animationData from '../../../public/animations/animation2.json';
+import animationData from '../../../../public/animations/animation2.json';
 
 const Lottie = dynamic(() => import('lottie-react'), { ssr: false });
 

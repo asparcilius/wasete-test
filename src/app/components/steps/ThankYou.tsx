@@ -1,10 +1,10 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Skip } from '../services/skipService';
-import { Card } from './Card';
-import { GradientHeading } from './GradientHeading';
-import { commonStyles, spacing } from '../styles/common';
+import { Skip } from '../../services/skipService';
+import { Card } from '../common/Card';
+import { GradientHeading } from '../common/GradientHeading';
+import { commonStyles, spacing } from '../../styles/common';
 
 interface ThankYouProps {
   skip: Skip;

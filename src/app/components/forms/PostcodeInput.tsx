@@ -1,11 +1,11 @@
 'use client';
 
 import { useState, useEffect, useRef, useCallback } from 'react';
-import { addressService } from '../services/addressService';
-import type { Address } from '../types/address';
+import { addressService } from '../../services/addressService';
+import type { Address } from '../../types/address';
 import { MapPinIcon } from '@heroicons/react/24/outline';
-import { GradientButton } from './GradientButton';
-import { useDebounce } from '../hooks/useDebounce';
+import { GradientButton } from '../common/GradientButton';
+import { useDebounce } from '../../hooks/useDebounce';
 
 interface PostcodeInputProps {
   onSubmit: (address: Address) => void;

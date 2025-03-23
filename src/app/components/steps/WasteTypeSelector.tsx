@@ -1,13 +1,13 @@
 'use client';
 
 import { useState } from 'react';
-import { HeavyWasteModal } from './HeavyWasteModal';
-import { wasteTypes, WasteType } from '../data/wasteTypes';
-import { Button } from './Button';
-import { GradientButton } from './GradientButton';
-import { Card } from './Card';
-import { GradientHeading } from './GradientHeading';
-import { commonStyles } from '../styles/common';
+import { HeavyWasteModal } from '../modals/HeavyWasteModal';
+import { wasteTypes, WasteType } from '../../data/wasteTypes';
+import { Button } from '../common/Button';
+import { GradientButton } from '../common/GradientButton';
+import { Card } from '../common/Card';
+import { GradientHeading } from '../common/GradientHeading';
+import { commonStyles } from '../../styles/common';
 
 interface WasteTypeSelectorProps {
   onSelect: (wasteType: string[]) => void;
