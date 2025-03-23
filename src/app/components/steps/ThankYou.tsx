@@ -41,8 +41,8 @@ export const ThankYou = ({ skip, address }: ThankYouProps) => {
             </p>
           </div>
 
-          <div className={`${spacing.section} pt-2 sm:pt-4`}>
-            <Card className="p-3 sm:p-6">
+          <div className="space-y-4 sm:space-y-6 pt-2 sm:pt-4">
+            <Card className="p-3 sm:p-6 bg-gray-900/50">
               <h3 className="text-base sm:text-lg font-medium text-white mb-3 sm:mb-4">Order Summary</h3>
               <div className="space-y-2 sm:space-y-3 text-sm sm:text-base">
                 <div className="flex justify-between items-center">
@@ -72,7 +72,7 @@ export const ThankYou = ({ skip, address }: ThankYouProps) => {
               </div>
             </Card>
 
-            <Card className="p-3 sm:p-6 bg-emerald-400/10 border-emerald-400/20">
+            <Card className="p-3 sm:p-6 bg-emerald-400/5 border-emerald-400/20">
               <div className="flex items-start gap-3 sm:gap-4">
                 <div className="p-1.5 sm:p-2 rounded-full bg-emerald-400/10">
                   <svg className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
