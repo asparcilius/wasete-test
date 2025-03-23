@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { HeavyWasteModal } from './HeavyWasteModal';
 
 interface WasteType {
   id: string;
@@ -11,7 +12,7 @@ interface WasteType {
 }
 
 interface WasteTypeSelectorProps {
-  onSelect: (wasteType: string) => void;
+  onSelect: (wasteType: string[]) => void;
   onBack: () => void;
 }
 
@@ -47,11 +48,30 @@ const wasteTypes: WasteType[] = [
 ];
 
 export const WasteTypeSelector = ({ onSelect, onBack }: WasteTypeSelectorProps) => {
-  const [selectedType, setSelectedType] = useState<string | null>(null);
+  const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
+  const [showHeavyWasteModal, setShowHeavyWasteModal] = useState(false);
 
   const handleSelect = (typeId: string) => {
-    setSelectedType(typeId);
-    onSelect(typeId);
+    setSelectedTypes(prev => 
+      prev.includes(typeId)
+        ? prev.filter(id => id !== typeId)
+        : [...prev, typeId]
+    );
+  };
+
+  const handleContinue = () => {
+    // Always show modal when clicking continue
+    setShowHeavyWasteModal(true);
+  };
+
+  const handleHeavyWasteConfirm = (heavyWasteTypes: string[]) => {
+    // Combine regular waste types with heavy waste types if any were selected
+    const allWasteTypes = heavyWasteTypes.length > 0 
+      ? [...selectedTypes, ...heavyWasteTypes]
+      : selectedTypes;
+    
+    onSelect(allWasteTypes);
+    setShowHeavyWasteModal(false);
   };
 
   return (
@@ -79,7 +99,7 @@ export const WasteTypeSelector = ({ onSelect, onBack }: WasteTypeSelectorProps) 
             key={type.id}
             onClick={() => handleSelect(type.id)}
             className={`p-6 rounded-lg border-2 transition-all duration-200 text-left ${
-              selectedType === type.id
+              selectedTypes.includes(type.id)
                 ? 'border-blue-500 bg-gray-800'
                 : 'border-gray-700 bg-gray-900 hover:border-gray-600'
             }`}
@@ -117,10 +137,10 @@ export const WasteTypeSelector = ({ onSelect, onBack }: WasteTypeSelectorProps) 
           Back
         </button>
         <button
-          onClick={() => selectedType && onSelect(selectedType)}
-          disabled={!selectedType}
+          onClick={handleContinue}
+          disabled={selectedTypes.length === 0}
           className={`px-6 py-2 rounded-lg transition-colors ${
-            selectedType
+            selectedTypes.length > 0
               ? 'bg-blue-600 text-white hover:bg-blue-700'
               : 'bg-gray-700 text-gray-400 cursor-not-allowed'
           }`}
@@ -128,6 +148,12 @@ export const WasteTypeSelector = ({ onSelect, onBack }: WasteTypeSelectorProps) 
           Continue
         </button>
       </div>
+
+      <HeavyWasteModal
+        isOpen={showHeavyWasteModal}
+        onClose={() => setShowHeavyWasteModal(false)}
+        onConfirm={handleHeavyWasteConfirm}
+      />
     </div>
   );
 }; 
