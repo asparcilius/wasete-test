@@ -41,44 +41,60 @@ export default function Home() {
     }
   };
 
+  const steps = [
+    { id: 'postcode', number: 1, label: 'Postcode' },
+    { id: 'waste-type', number: 2, label: 'Waste Type' },
+    { id: 'skip-select', number: 3, label: 'Select Skip' }
+  ];
+
   return (
     <main className="min-h-screen bg-gradient-to-b from-gray-900 to-black text-white">
       <div className="container mx-auto py-8">
         {/* Progress Steps */}
-        <div className="max-w-4xl mx-auto mb-8">
-          <div className="flex items-center justify-between px-4">
-            <div className="flex items-center">
-              <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
-                currentStep === 'postcode' ? 'bg-blue-600' : 'bg-blue-600'
-              }`}>
-                1
+        <div className="max-w-4xl mx-auto mb-12">
+          <div className="relative flex justify-between px-2">
+            {steps.map((step, index) => (
+              <div key={step.id} className="flex flex-col items-center relative z-10">
+                <div 
+                  className={`w-10 h-10 rounded-2xl flex items-center justify-center transition-all duration-500 ${
+                    currentStep === step.id
+                      ? 'bg-gradient-to-r from-emerald-400 to-teal-400 shadow-lg shadow-emerald-400/20 scale-110'
+                      : currentStep === steps[index + 1]?.id || currentStep === steps[index + 2]?.id
+                      ? 'bg-emerald-400/20 text-emerald-400'
+                      : 'bg-white/5 text-white/40'
+                  }`}
+                >
+                  <span className="text-sm font-medium">{step.number}</span>
+                </div>
+                <span 
+                  className={`mt-2 text-sm transition-all duration-500 ${
+                    currentStep === step.id
+                      ? 'text-white font-medium'
+                      : currentStep === steps[index + 1]?.id || currentStep === steps[index + 2]?.id
+                      ? 'text-emerald-400/80'
+                      : 'text-white/40'
+                  }`}
+                >
+                  {step.label}
+                </span>
               </div>
-              <div className={`h-1 w-16 mx-2 ${
-                currentStep !== 'postcode' ? 'bg-blue-600' : 'bg-gray-700'
-              }`} />
-            </div>
-            <div className="flex items-center">
-              <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
-                currentStep === 'waste-type' ? 'bg-blue-600' : currentStep === 'skip-select' ? 'bg-blue-600' : 'bg-gray-700'
-              }`}>
-                2
-              </div>
-              <div className={`h-1 w-16 mx-2 ${
-                currentStep === 'skip-select' ? 'bg-blue-600' : 'bg-gray-700'
-              }`} />
-            </div>
-            <div className="flex items-center">
-              <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
-                currentStep === 'skip-select' ? 'bg-blue-600' : 'bg-gray-700'
-              }`}>
-                3
+            ))}
+
+            {/* Progress Line */}
+            <div className="absolute top-5 left-0 w-full h-[2px] -z-0">
+              <div className="relative w-full h-full bg-white/5">
+                <div
+                  className="absolute top-0 left-0 h-full bg-gradient-to-r from-emerald-400 to-teal-400 transition-all duration-500"
+                  style={{
+                    width: currentStep === 'postcode' 
+                      ? '0%' 
+                      : currentStep === 'waste-type'
+                      ? '50%'
+                      : '100%'
+                  }}
+                />
               </div>
             </div>
-          </div>
-          <div className="flex justify-between px-2 mt-2 text-sm text-gray-400">
-            <span>Postcode</span>
-            <span>Waste Type</span>
-            <span>Select Skip</span>
           </div>
         </div>
 
