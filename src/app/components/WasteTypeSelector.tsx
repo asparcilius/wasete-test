@@ -75,7 +75,7 @@ export const WasteTypeSelector = ({ onSelect, onBack }: WasteTypeSelectorProps) 
   return (
     <div className="relative h-[calc(100vh-12rem)] flex flex-col">
       {/* Fixed Header */}
-      <div className="flex-shrink-0 text-center mb-6">
+      <div className="flex-shrink-0 text-center mb-4">
         <h1 className="text-4xl font-medium tracking-tight bg-gradient-to-b from-white to-white/60 bg-clip-text text-transparent">
           What are you disposing of?
         </h1>
@@ -85,7 +85,7 @@ export const WasteTypeSelector = ({ onSelect, onBack }: WasteTypeSelectorProps) 
       </div>
 
       {/* Scrollable Selections */}
-      <div className="flex-1 overflow-y-auto pr-1 -mr-1">
+      <div className="flex-1 overflow-y-auto overscroll-contain touch-pan-y will-change-scroll pr-1 -mr-1">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
           {wasteTypes.map((type) => (
             <button
@@ -130,52 +130,50 @@ export const WasteTypeSelector = ({ onSelect, onBack }: WasteTypeSelectorProps) 
       </div>
 
       {/* Fixed Bottom Actions */}
-      <div className="flex-shrink-0 mt-6">
-        <div className="flex flex-col sm:flex-row sm:justify-between gap-3">
-          <button
-            onClick={onBack}
-            className="px-6 py-3 rounded-xl font-medium bg-white/5 text-white hover:bg-white/10 transition-all flex items-center justify-center group"
+      <div className="flex flex-row items-center justify-between gap-3 fixed bottom-0 left-0 right-0 p-4 bg-black/50 backdrop-blur-lg border-t border-white/10">
+        <button
+          onClick={onBack}
+          className="flex-1 px-6 py-3 rounded-xl font-medium bg-white/5 text-white hover:bg-white/10 transition-all flex items-center justify-center group"
+        >
+          <svg
+            className="w-5 h-5 mr-2 group-hover:-translate-x-0.5 transition-transform"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
           >
-            <svg
-              className="w-5 h-5 mr-2 group-hover:-translate-x-0.5 transition-transform"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M15 19l-7-7 7-7"
-              />
-            </svg>
-            Back
-          </button>
-          <button
-            onClick={handleContinue}
-            disabled={selectedTypes.length === 0}
-            className={`sm:w-[200px] px-6 py-3 rounded-xl font-medium transition-all flex items-center justify-center group ${
-              selectedTypes.length > 0
-                ? 'bg-gradient-to-r from-emerald-400 to-teal-400 text-black hover:from-emerald-500 hover:to-teal-500'
-                : 'bg-white/5 text-white/40 cursor-not-allowed'
-            }`}
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M15 19l-7-7 7-7"
+            />
+          </svg>
+          Back
+        </button>
+        <button
+          onClick={handleContinue}
+          disabled={selectedTypes.length === 0}
+          className={`flex-1 px-6 py-3 rounded-xl font-medium transition-all flex items-center justify-center group ${
+            selectedTypes.length > 0
+              ? 'bg-gradient-to-r from-emerald-400 to-teal-400 text-black hover:from-emerald-500 hover:to-teal-500'
+              : 'bg-white/5 text-white/40 cursor-not-allowed'
+          }`}
+        >
+          Continue
+          <svg
+            className="w-5 h-5 ml-2 group-hover:translate-x-0.5 transition-transform"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
           >
-            Continue
-            <svg
-              className="w-5 h-5 ml-2 group-hover:translate-x-0.5 transition-transform"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M9 5l7 7-7 7"
-              />
-            </svg>
-          </button>
-        </div>
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M9 5l7 7-7 7"
+            />
+          </svg>
+        </button>
       </div>
 
       {/* Heavy Waste Modal */}
