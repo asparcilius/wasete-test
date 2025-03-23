@@ -2,7 +2,6 @@
 
 import { motion } from 'framer-motion';
 import { Skip } from '../../services/skipService';
-import { Card } from '../common/Card';
 import { GradientHeading } from '../common/GradientHeading';
 import { commonStyles } from '../../styles/common';
 
