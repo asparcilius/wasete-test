@@ -53,6 +53,22 @@ export default function Home() {
         {/* Progress Steps */}
         <div className="max-w-4xl mx-auto mb-12">
           <div className="relative flex justify-between px-2">
+            {/* Progress Line - Behind steps */}
+            <div className="absolute top-5 left-[20px] w-[calc(100%-50px)] h-[2px] -z-0">
+              <div className="relative w-full h-full bg-white/5">
+                <div
+                  className="absolute top-0 left-0 h-full bg-gradient-to-r from-emerald-400 to-teal-400 transition-all duration-500"
+                  style={{
+                    width: currentStep === 'postcode' 
+                      ? '0%' 
+                      : currentStep === 'waste-type'
+                      ? '50%'
+                      : '100%'
+                  }}
+                />
+              </div>
+            </div>
+
             {steps.map((step, index) => (
               <div key={step.id} className="flex flex-col items-center relative z-10">
                 <div 
@@ -64,7 +80,13 @@ export default function Home() {
                       : 'bg-white/5 text-white/40'
                   }`}
                 >
-                  <span className="text-sm font-medium">{step.number}</span>
+                  <span className={`text-sm font-medium ${
+                    currentStep === step.id
+                      ? 'text-black'
+                      : currentStep === steps[index + 1]?.id || currentStep === steps[index + 2]?.id
+                      ? 'text-emerald-400'
+                      : 'text-white/40'
+                  }`}>{step.number}</span>
                 </div>
                 <span 
                   className={`mt-2 text-sm transition-all duration-500 ${
@@ -79,22 +101,6 @@ export default function Home() {
                 </span>
               </div>
             ))}
-
-            {/* Progress Line */}
-            <div className="absolute top-5 left-0 w-full h-[2px] -z-0">
-              <div className="relative w-full h-full bg-white/5">
-                <div
-                  className="absolute top-0 left-0 h-full bg-gradient-to-r from-emerald-400 to-teal-400 transition-all duration-500"
-                  style={{
-                    width: currentStep === 'postcode' 
-                      ? '0%' 
-                      : currentStep === 'waste-type'
-                      ? '50%'
-                      : '100%'
-                  }}
-                />
-              </div>
-            </div>
           </div>
         </div>
 
