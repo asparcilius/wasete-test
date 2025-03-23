@@ -44,7 +44,12 @@ export const SkipSelector = ({ postcode, area, onSelect, onBack }: SkipSelectorP
 
   const handleSelect = (skip: Skip) => {
     setSelectedSkip(skip);
-    onSelect(skip);
+  };
+
+  const handleContinue = () => {
+    if (selectedSkip) {
+      onSelect(selectedSkip);
+    }
   };
 
   if (loading) {
@@ -93,8 +98,8 @@ export const SkipSelector = ({ postcode, area, onSelect, onBack }: SkipSelectorP
   }
 
   return (
-    <div className="w-full max-w-7xl mx-auto p-6">
-      <div className="text-center mb-12">
+    <div className="w-full max-w-6xl mx-auto p-6">
+      <div className="text-center mb-8">
         <h1 className="text-4xl font-medium tracking-tight bg-gradient-to-b from-white to-white/60 bg-clip-text text-transparent">
           Choose Your Skip
         </h1>
@@ -103,109 +108,119 @@ export const SkipSelector = ({ postcode, area, onSelect, onBack }: SkipSelectorP
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
         {skips.map((skip) => (
-          <button
+          <div
             key={skip.id}
             onClick={() => handleSelect(skip)}
-            className={`group backdrop-blur-xl bg-white/5 rounded-3xl border overflow-hidden transition-all duration-200 ${
+            className={`group relative backdrop-blur-xl rounded-2xl transition-all duration-300 cursor-pointer ${
               selectedSkip?.id === skip.id
-                ? 'border-emerald-400/50 scale-[1.02]'
-                : 'border-white/10 hover:border-white/20 hover:scale-[1.01]'
+                ? 'bg-gradient-to-b from-emerald-600/20 to-emerald-600/5 ring-2 ring-emerald-400/50 ring-offset-2 ring-offset-black'
+                : 'bg-white/5 hover:bg-white/8'
             }`}
           >
-            <div className="relative h-48">
+            <div className="absolute inset-0 rounded-2xl transition-opacity bg-gradient-to-b from-white/5 to-transparent opacity-0 group-hover:opacity-100"></div>
+            
+            <div className="relative h-40 rounded-t-2xl overflow-hidden">
               <Image
                 src="/images/skip-placeholder.jpeg"
                 alt={`${skip.size} Yard Skip`}
                 fill
-                className="object-cover brightness-90 group-hover:brightness-100 transition-all duration-200"
+                className="object-cover transition-transform duration-500 group-hover:scale-105"
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 priority
               />
-              <div className="absolute top-4 right-4">
-                <div className="px-4 py-2 rounded-2xl bg-black/50 backdrop-blur-md border border-white/10 text-white font-medium">
+              <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+              <div className="absolute top-3 right-3">
+                <div className="px-3 py-1.5 rounded-xl bg-black/50 backdrop-blur-md text-white text-sm font-medium border border-white/10">
                   {skip.size} Yards
                 </div>
               </div>
               {skip.isPrivateOnly && (
-                <div className="absolute bottom-4 left-4">
-                  <div className="flex items-center gap-2 px-4 py-2 rounded-2xl bg-yellow-400/10 backdrop-blur-md border border-yellow-400/20">
-                    <svg className="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
-                      <path
-                        fillRule="evenodd"
-                        d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
-                        clipRule="evenodd"
-                      />
+                <div className="absolute bottom-3 left-3">
+                  <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-yellow-400/10 backdrop-blur-md border border-yellow-400/20">
+                    <svg className="w-3.5 h-3.5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
                     </svg>
-                    <span className="text-sm text-yellow-400 font-medium">Private Property Only</span>
+                    <span className="text-xs text-yellow-400 font-medium">Private Property Only</span>
                   </div>
                 </div>
               )}
             </div>
 
-            <div className="p-6 space-y-4">
+            <div className="p-5 space-y-4">
               <div>
-                <h3 className="text-xl font-medium text-white">{skip.size} Yard Skip</h3>
-                <p className="text-white/60 text-sm mt-1">{skip.period} day hire period</p>
+                <h3 className="text-lg font-medium text-white group-hover:text-emerald-400 transition-colors">
+                  {skip.size} Yard Skip
+                </h3>
+                <p className="text-white/60 text-sm mt-0.5">{skip.period} day hire period</p>
               </div>
 
-              <div className="flex items-baseline gap-2">
+              <div className="flex items-baseline gap-1.5">
                 <span className="text-3xl font-medium bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent">
                   £{skip.price.toFixed(2)}
                 </span>
-                <span className="text-white/40">per week</span>
+                <span className="text-sm text-white/40">per week</span>
               </div>
 
-              <div className="pt-2">
-                <div className={`w-full py-3 rounded-2xl font-medium transition-all duration-200 flex items-center justify-center group/btn gap-2 ${
+              <div
+                className={`w-full py-3 rounded-xl font-medium transition-all duration-200 text-center ${
                   selectedSkip?.id === skip.id
-                    ? 'bg-emerald-400/20 text-emerald-400'
-                    : 'bg-white/5 text-white group-hover:bg-white/10'
-                }`}>
-                  {selectedSkip?.id === skip.id ? (
-                    <>
-                      Selected
-                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                      </svg>
-                    </>
-                  ) : (
-                    <>
-                      Select This Skip
-                      <svg className="w-5 h-5 group-hover/btn:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                      </svg>
-                    </>
-                  )}
-                </div>
+                    ? 'bg-emerald-400 text-black'
+                    : 'bg-white/10 text-white group-hover:bg-white/15'
+                }`}
+              >
+                {selectedSkip?.id === skip.id ? 'Selected' : 'Select This Skip'}
               </div>
             </div>
-          </button>
+          </div>
         ))}
       </div>
 
-      <div className="mt-8">
-        <button
-          onClick={onBack}
-          className="px-6 py-4 rounded-2xl font-medium bg-white/5 text-white hover:bg-white/10 transition-all duration-200 flex items-center group"
-        >
-          <svg
-            className="w-5 h-5 mr-2 group-hover:-translate-x-0.5 transition-transform"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M15 19l-7-7 7-7"
-            />
-          </svg>
-          Back
-        </button>
-      </div>
+      {/* Fixed Bottom Bar */}
+      {selectedSkip && (
+        <div className="fixed bottom-0 left-0 right-0 bg-black/80 backdrop-blur-xl border-t border-white/10">
+          <div className="container mx-auto px-4 py-4 flex items-center justify-between">
+            <div className="flex items-center gap-6">
+              <button
+                onClick={onBack}
+                className="px-6 py-3 rounded-xl font-medium bg-white/5 text-white hover:bg-white/10 transition-all duration-200 flex items-center group"
+              >
+                <svg
+                  className="w-5 h-5 mr-2 group-hover:-translate-x-0.5 transition-transform"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                </svg>
+                Back
+              </button>
+              <div className="flex items-baseline gap-2">
+                <span className="text-white/60">Selected:</span>
+                <span className="text-white font-medium">{selectedSkip.size} Yard Skip</span>
+                <span className="text-2xl font-medium bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent ml-4">
+                  £{selectedSkip.price.toFixed(2)}
+                </span>
+              </div>
+            </div>
+            <button
+              onClick={() => onSelect(selectedSkip)}
+              className="px-8 py-3 rounded-xl font-medium bg-gradient-to-r from-emerald-400 to-teal-400 text-black hover:from-emerald-300 hover:to-teal-300 transition-all duration-200 flex items-center group"
+            >
+              Continue
+              <svg
+                className="w-5 h-5 ml-2 group-hover:translate-x-0.5 transition-transform"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }; 
