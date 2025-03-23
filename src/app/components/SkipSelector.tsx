@@ -46,11 +46,7 @@ export const SkipSelector = ({ postcode, area, onSelect, onBack }: SkipSelectorP
     setSelectedSkip(skip);
   };
 
-  const handleContinue = () => {
-    if (selectedSkip) {
-      onSelect(selectedSkip);
-    }
-  };
+
 
   if (loading) {
     return <Loading message="Loading available skips..." />;

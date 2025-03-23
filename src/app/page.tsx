@@ -13,7 +13,6 @@ type Step = 'postcode' | 'waste-type' | 'skip-select' | 'thank-you';
 export default function Home() {
   const [currentStep, setCurrentStep] = useState<Step>('postcode');
   const [selectedAddress, setSelectedAddress] = useState<Address | null>(null);
-  const [wasteTypes, setWasteTypes] = useState<string[]>([]);
   const [selectedSkip, setSelectedSkip] = useState<Skip | null>(null);
 
   const handleAddressSubmit = (address: Address) => {
@@ -21,8 +20,7 @@ export default function Home() {
     setCurrentStep('waste-type');
   };
 
-  const handleWasteTypeSelect = (selectedTypes: string[]) => {
-    setWasteTypes(selectedTypes);
+  const handleWasteTypeSelect = () => {
     setCurrentStep('skip-select');
   };
 

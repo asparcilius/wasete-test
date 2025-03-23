@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { addressService } from '../services/addressService';
 import type { Address } from '../types/address';
 
@@ -34,14 +34,39 @@ export const PostcodeInput = ({ onSubmit }: PostcodeInputProps) => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
+  const handlePostcodeSearch = useCallback(async () => {
+    if (!postcode.trim()) {
+      return;
+    }
+    
+    // Basic UK postcode validation
+    const postcodeRegex = /^[A-Z]{1,2}[0-9][A-Z0-9]? ?[0-9][A-Z]{2}$/i;
+    if (!postcodeRegex.test(postcode.trim())) {
+      setError('Please enter a valid UK postcode');
+      return;
+    }
+
+    try {
+      setLoading(true);
+      setError('');
+      const results = await addressService.searchAddresses(postcode.trim());
+      setAddresses(results);
+      setShowAddressList(true);
+    } catch (error) {
+      console.error('Error searching addresses:', error);
+      setError('Failed to find addresses. Please try again.');
+      setAddresses([]);
+    } finally {
+      setLoading(false);
+    }
+  }, [postcode]);
+
   useEffect(() => {
-    // Clear previous timeout
     if (searchTimeoutRef.current) {
       clearTimeout(searchTimeoutRef.current);
     }
 
-    if (postcode.length >= 5) { // Start searching when postcode is at least 5 characters
-      // Add a small delay to prevent too many API calls while typing
+    if (postcode.length >= 5) {
       searchTimeoutRef.current = setTimeout(() => {
         handlePostcodeSearch();
       }, 300);
@@ -55,32 +80,7 @@ export const PostcodeInput = ({ onSubmit }: PostcodeInputProps) => {
         clearTimeout(searchTimeoutRef.current);
       }
     };
-  }, [postcode]);
-
-  const handlePostcodeSearch = async () => {
-    if (!postcode.trim()) {
-      return;
-    }
-    
-    // Basic UK postcode validation
-    const postcodeRegex = /^[A-Z]{1,2}[0-9][A-Z0-9]? ?[0-9][A-Z]{2}$/i;
-    if (!postcodeRegex.test(postcode.trim())) {
-      return;
-    }
-
-    try {
-      setLoading(true);
-      setError('');
-      const results = await addressService.searchAddresses(postcode.trim());
-      setAddresses(results);
-      setShowAddressList(true);
-    } catch (err) {
-      setError('Failed to find addresses. Please try again.');
-      setAddresses([]);
-    } finally {
-      setLoading(false);
-    }
-  };
+  }, [postcode, handlePostcodeSearch]);
 
   const handleAddressSelect = async (address: Address) => {
     try {
@@ -95,8 +95,8 @@ export const PostcodeInput = ({ onSubmit }: PostcodeInputProps) => {
       setStreet(details.street);
       setHouseNumber(details.buildingNumber);
       
-      // Don't submit yet - wait for user to click Continue
-    } catch (err) {
+    } catch (error) {
+      console.error('Error fetching address details:', error);
       setError('Failed to fetch address details. Please try again.');
     } finally {
       setLoading(false);

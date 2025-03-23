@@ -79,7 +79,7 @@ export const ThankYou = ({ skip, address }: ThankYouProps) => {
               <div>
                 <p className="text-sm sm:text-base text-emerald-400 font-medium">What happens next?</p>
                 <p className="text-xs sm:text-sm text-white/60 mt-1 sm:mt-2">
-                  We'll send you an email confirmation with your order details and delivery instructions. 
+                  We&apos;ll send you an email confirmation with your order details and delivery instructions. 
                   Our team will contact you shortly to arrange the delivery time.
                 </p>
               </div>

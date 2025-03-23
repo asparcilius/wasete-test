@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import dynamic from 'next/dynamic';
 import type { LottieRefCurrentProps } from 'lottie-react';
 import animationData from '../../../public/animations/animation2.json';
