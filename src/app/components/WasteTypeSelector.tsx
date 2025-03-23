@@ -73,7 +73,7 @@ export const WasteTypeSelector = ({ onSelect, onBack }: WasteTypeSelectorProps) 
   };
 
   return (
-    <div className="relative h-[calc(100vh-12rem)] flex flex-col">
+    <div className="relative h-[100dvh] flex flex-col">
       {/* Fixed Header */}
       <div className="flex-shrink-0 text-center mb-4">
         <h1 className="text-4xl font-medium tracking-tight bg-gradient-to-b from-white to-white/60 bg-clip-text text-transparent">
@@ -85,8 +85,8 @@ export const WasteTypeSelector = ({ onSelect, onBack }: WasteTypeSelectorProps) 
       </div>
 
       {/* Scrollable Selections */}
-      <div className="flex-1 overflow-y-auto overscroll-contain touch-pan-y will-change-scroll pr-1 -mr-1">
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+      <div className="flex-1 overflow-y-auto overscroll-contain -webkit-overflow-scrolling-touch">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 px-4 pb-24">
           {wasteTypes.map((type) => (
             <button
               key={type.id}
