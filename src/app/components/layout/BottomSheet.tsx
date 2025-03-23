@@ -38,7 +38,7 @@ export const BottomSheet = ({ isOpen, onClose, title, children }: BottomSheetPro
               leaveFrom="opacity-100 translate-y-0 sm:scale-100"
               leaveTo="opacity-0 translate-y-full sm:translate-y-0 sm:scale-95"
             >
-              <Dialog.Panel className="relative w-full transform overflow-hidden rounded-t-2xl sm:rounded-2xl bg-gray-900 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
+              <Dialog.Panel className="relative w-full transform rounded-t-2xl sm:rounded-2xl bg-gray-900 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
                 <div className="px-4 py-3 sm:px-6 flex items-center justify-between border-b border-white/10">
                   <Dialog.Title as="h3" className="text-base font-semibold text-white">
                     {title}
