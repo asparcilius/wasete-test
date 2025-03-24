@@ -1,92 +1,106 @@
-# RemWaste - Modern Skip Hire Application
+# RemWaste - Skip Hire Made Simple
+
+A modern, user-friendly application for hiring skips online. Built with the latest web technologies and designed with user experience in mind.
+
+## Why This Design Works 🎨
+
+### Modern Glass Design
+I chose a glassmorphism design approach because:
+- Creates a premium, modern feel that stands out
+- Improves readability with subtle transparency
+- Adds depth and dimension to the interface
+- Makes waste management feel clean and professional
+
+### User-Friendly Flow
+The booking process is broken into three easy steps:
+1. **Find Your Location** (30 seconds)
+   - Quick postcode lookup
+   - Instant address validation
+   - Smart address suggestions
+
+2. **Tell Us About Your Waste** (1 minute)
+   - Simple waste type selection
+   - Clear guidelines for each type
+   - Special handling warnings when needed
+
+3. **Choose Your Skip** (1 minute)
+   - Visual size comparison
+   - Clear pricing
+   - Availability checking in real-time
+
+### Smart Features
+- **Intelligent Search**: Postcode validation with debouncing to prevent unnecessary API calls
+- **Real-Time Updates**: Live availability and pricing updates
+- **Smart Validation**: Prevents errors before they happen
+- **Smooth Animations**: Provides visual feedback for actions
+
+### Mobile-First Design
+- Fully responsive on all devices
+- Touch-optimized interface
+- Easy-to-tap buttons and inputs
+- Sticky navigation for better mobile UX
+
+## Technical Decisions 🛠️
+
+### Framework Choice
+- **Next.js 15**: Chosen for its:
+  - Server-side rendering capabilities
+  - Optimized performance
+  - Built-in TypeScript support
+  - Easy deployment options
 
 
-### 1. Beautiful Glassmorphism Design
-I've gone for a modern glassmorphism look because:
-- It looks super premium and modern
-- Makes the UI feel light and airy
-- Keeps everything readable while looking fancy
-- Perfect for a waste management service that wants to look professional
 
-### 2. Smart Step-by-Step Flow
-I've broken down the skip hire process into 3 simple steps:
-1. **Location** (30 sec) - Enter your postcode
-2. **Waste Type** (1 min) - Tell us what you're throwing away
-3. **Skip Selection** (1 min) - Pick the perfect skip size
+### Styling Solution
+- **Tailwind CSS**: Selected because:
+  - Faster development cycles
+  - Consistent design system
+  - Better performance (smaller CSS bundle)
+  - Easy responsive design
 
-Why this works:
-- No overwhelming choices
-- Clear progress tracking
-- Each step is focused and simple
-- Less chance of mistakes
-
-### 3. Real-Time Features
-- Instant postcode validation
-- Live skip availability checking
-- Smooth transitions between steps
-- Real-time price updates
-
-### 4. Mobile-First Approach
-- Works great on phones and tablets
-- Touch-friendly interface
-- Responsive design that adapts to any screen
-- Bottom navigation for easy access
-
-## Tech Stack 🛠️
-
-- **Next.js 15** - For blazing fast performance
-- **React 19** - For smooth UI interactions
-- **TypeScript** - For rock-solid code
-- **Tailwind CSS** - For beautiful styling
-- **Headless UI** - For accessible components
-- **Framer Motion** - For smooth animations
-
-## Project Structure 📁
-
+### Component Architecture
 ```
 src/
 ├── app/
-│   ├── components/     # Our beautiful UI components
-│   ├── hooks/         # Custom React hooks
-│   ├── services/      # API and business logic
-│   ├── styles/        # Global styles and theme
-│   └── types/         # TypeScript types
+│   ├── components/
+│   │   ├── common/     # Reusable UI components
+│   │   ├── forms/      # Form-specific components
+│   │   ├── layout/     # Layout components
+│   │   └── steps/      # Step-specific components
+│   ├── hooks/          # Custom React hooks
+│   ├── services/       # API integration
+│   ├── styles/         # Global styles
+│   └── types/          # TypeScript definitions
 ```
 
-## Key Components 🎯
+### Key Components
+1. **Form Components**
+   - `PostcodeInput`: Smart postcode lookup with debouncing
+   - `WasteTypeSelector`: Interactive waste type selection
+   - `SkipSelector`: Visual skip size comparison
 
-### 1. Reusable UI Components
-- `Card` - Beautiful glassmorphic cards
-- `Button` & `GradientButton` - Stylish action buttons
-- `Badge` - For status and labels
-- `GradientHeading` - Eye-catching titles
+2. **UI Components**
+   - `Card`: Glassmorphic container component
+   - `GradientButton`: Animated action buttons
+   - `Badge`: Status indicators
+   - `GradientHeading`: Styled headings
 
-### 2. Smart Features
-- Debounced postcode search
-- Real-time validation
-- Smooth transitions
-- Error handling
-- Loading states
-
-### 3. User Experience
-- Clear progress indicators
-- Helpful tooltips
-- Responsive layouts
-- Touch-friendly controls
+3. **Hooks & Services**
+   - `useDebounce`: Prevents excessive API calls
+   - `addressService`: Handles address lookups
+   - `skipService`: Manages skip availability
 
 ## Getting Started 🚀
 
-
-
+1. Clone the repository
 2. Install dependencies:
    ```bash
    npm install
    ```
-
-3. Start the development server:
+3. Start development server:
    ```bash
    npm run dev
    ```
 
-Live url of the demo https://wasete-test.vercel.app/
+View the live demo at: https://wasete-test.vercel.app/
 
